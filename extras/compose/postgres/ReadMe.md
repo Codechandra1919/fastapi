@@ -21,17 +21,19 @@
 
 ## Inhalt
 
-- [Docker Container vs. Installation auf dem Host-Rechner](#docker-container-vs-installation-auf-dem-host-rechner)
-- [Named Volumes erstellen](#named-volumes-erstellen)
-- [Named Volumes initialisieren](#named-volumes-initialisieren)
-- [Installation ohne TLS](#installation-ohne-tls)
-- [Datenbank, Datenbank-User und Schema anlegen](#datenbank-datenbank-user-und-schema-anlegen)
-- [Ausgewählte Administrationskommandos für PostgreSQL](#ausgewählte-administrationskommandos-für-postgresql)
-- [Optional: TLS für den PostgreSQL-Server mit OpenSSL überprüfen](#optional-tls-für-den-postgresql-server-mit-openssl-überprüfen)
-- [Erweiterung PostgreSQL für VS Code](#erweiterung-postgresql-für-vs-code)
-  - [Konfiguration](#konfiguration)
-  - [DB-Schema visualisieren](#db-schema-visualisieren)
-  - [Chat mit Copilot](#chat-mit-copilot)
+- [Hinweise zur Installation und Konfiguration von PostgreSQL](#hinweise-zur-installation-und-konfiguration-von-postgresql)
+  - [Inhalt](#inhalt)
+  - [Docker Container vs. Installation auf dem Host-Rechner](#docker-container-vs-installation-auf-dem-host-rechner)
+  - [Named Volumes erstellen](#named-volumes-erstellen)
+  - [Named Volumes initialisieren](#named-volumes-initialisieren)
+  - [Installation ohne TLS](#installation-ohne-tls)
+  - [Datenbank, Datenbank-User und Schema anlegen](#datenbank-datenbank-user-und-schema-anlegen)
+  - [Ausgewählte Administrationskommandos für PostgreSQL](#ausgewählte-administrationskommandos-für-postgresql)
+  - [Optional: TLS für den PostgreSQL-Server mit OpenSSL überprüfen](#optional-tls-für-den-postgresql-server-mit-openssl-überprüfen)
+  - [Erweiterung PostgreSQL für VS Code](#erweiterung-postgresql-für-vs-code)
+    - [Konfiguration](#konfiguration)
+    - [DB-Schema visualisieren](#db-schema-visualisieren)
+    - [Chat mit Copilot](#chat-mit-copilot)
 
 ## Docker Container vs. Installation auf dem Host-Rechner
 
