@@ -21,13 +21,15 @@
 
 ## Inhalt
 
-- [PostgreSQL als Datenbanksystem](#postgresql-als-datenbanksystem)
-- [Installation](#installation)
-- [Konfiguration](#konfiguration)
-- [Client Secret](#client-secret)
-- [Ergänzung des eigenen Server-Projekts](#ergänzung-des-eigenen-server-projekts)
-- [Bruno mit einem Access Token](#bruno-mit-einem-access-token)
-- [Initial Access Token](#initial-access-token)
+- [Hinweise zu Keycloak als "Authorization Server"](#hinweise-zu-keycloak-als-authorization-server)
+  - [Inhalt](#inhalt)
+  - [PostgreSQL als Datenbanksystem](#postgresql-als-datenbanksystem)
+  - [Installation](#installation)
+  - [Konfiguration](#konfiguration)
+  - [Client Secret](#client-secret)
+  - [Ergänzung des eigenen Server-Projekts](#ergänzung-des-eigenen-server-projekts)
+  - [Bruno mit einem Access Token](#bruno-mit-einem-access-token)
+  - [Initial Access Token](#initial-access-token)
 
 ## PostgreSQL als Datenbanksystem
 
@@ -40,7 +42,7 @@ gestartet:
 
 ```shell
     # Windows
-    cd extras\compose\keycloak
+    cd extras\compose\keycloak # ---------------------------> cd extras\compose\postgres
     # macOS
     cd extras/compose/keycloak
 
@@ -52,7 +54,7 @@ zugegriffen:
 
 ```shell
     # Windows
-    cd extras\compose\keycloak
+    cd extras\compose\keycloak # ---------------------------> cd extras\compose\postgres
     # macOS
     cd extras/compose/keycloak
 
