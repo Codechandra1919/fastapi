@@ -1,0 +1,138 @@
+' Copyright (C) 2026 - present Juergen Zimmermann, Hochschule Karlsruhe
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License
+' along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+@startuml Klassendiagramm
+
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+
+package "Entitäten" {
+  abstract class Base
+
+  class Patient {
+    id: int
+    version: int
+    nachname: str
+    email: str
+    kategorie: int
+    has_newsletter: bool
+    geburtsdatum: date
+    homepage: str [0..1]
+    username: str [0..1]
+    erzeugt: datetime [0..1]
+    aktualisiert: datetime [0..1]
+    fachaerzte: list<Facharzt>
+    --
+    set(patient: Patient): None
+  }
+
+  class Adresse {
+    id: int
+    plz: str
+    ort: str
+  }
+
+  class Rechnung {
+    id: int
+    betrag: Decimal
+    waehrung: str
+  }
+
+  enum Geschlecht
+  enum Familienstand
+  enum Facharzt
+}
+
+package "Anwendungsschicht" {
+  class PatientService {
+    --
+    find_by_id(id: int, user: User): PatientDTO
+    find(...): Slice<PatientDTO>
+    find_nachnamen(teil: str): Sequence<str>
+  }
+
+  class PatientWriteService {
+    --
+    create(patient: Patient): PatientDTO
+    update(patient: Patient, id: int, version: int): PatientDTO
+    delete_by_id(id: int): None
+  }
+
+  class PatientRepository {
+    --
+    find_by_id(id: int, session: Session): Patient
+    find(...): Slice<Patient>
+    create(patient: Patient, session: Session): Patient
+    update(patient: Patient, session: Session): Patient
+    delete_by_id(id: int, session: Session): None
+  }
+
+  class UserService
+}
+
+package "DTOs" {
+  class PatientDTO {
+    id: int
+    version: int
+    nachname: str
+    email: str
+    kategorie: int
+    has_newsletter: bool
+    geburtsdatum: date
+    homepage: str [0..1]
+    username: str [0..1]
+    fachaerzte: list<Facharzt>
+    --
+    from_patient(patient: Patient): PatientDTO
+  }
+
+  class AdresseDTO {
+    plz: str
+    ort: str
+    --
+    from_adresse(adresse: Adresse): AdresseDTO
+  }
+
+  class Slice<T> {
+    content: tuple<T>
+    total_elements: int
+  }
+}
+
+Patient --|> Base
+Adresse --|> Base
+Rechnung --|> Base
+
+Patient "1" -- "0..1" Adresse : adresse
+Patient "1" -- "0..*" Rechnung : rechnungen
+Patient --> Geschlecht
+Patient --> Familienstand
+Patient --> Facharzt
+
+PatientService --> PatientRepository
+PatientWriteService --> PatientRepository
+PatientWriteService --> UserService
+PatientService ..> PatientDTO
+PatientWriteService ..> PatientDTO
+PatientRepository ..> Patient
+PatientDTO ..> Patient : from_patient()
+PatientDTO *-- AdresseDTO : adresse
+AdresseDTO ..> Adresse : from_adresse()
+PatientService ..> Slice
+PatientRepository ..> Slice
+
+footer (c) Jürgen Zimmermann
+
+@enduml
