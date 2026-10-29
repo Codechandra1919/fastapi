@@ -23,43 +23,39 @@ hide circle
 ' evtl. Prbleme mit Kraehenfuessen vermeiden
 skinparam linetype ortho
 
-entity "Patient" {
+entity "Mieter" {
   * id : integer <<generated>>
   --
   * version: integer
   * nachname : text
   * email : text <<unique>>
-  * kategorie: integer
-  * has_newsletter: boolean
-    geburtsdatum: date
-    geschlecht: Geschlecht
-    familienstand: Familienstand
-    fachaerzte: JSON
-    homepage: text
-  * **username**: text <<FK>>
+  * telefonnummer: text
+  * geburtsdatum: date
+  * username: text <<FK>>
   * erzeugt: timestamp
   * aktualisiert: timestamp
 }
 
-entity "Adresse" {
+entity "Mietvertrag" {
   * id : integer <<generated>>
   --
-  * plz : text
-  * ort : text
-  * **patient_id**: integer <<FK>>
+  * seiten_anz : integer
+  * kaution : decimal
+  * **mieter_id**: integer <<FK>>
 }
 
-entity "Rechnung" {
+entity "Mietrechnung" {
   * id : integer <<generated>>
   --
   * betrag : decimal
   * waehrung : text
-  * **patient_id**: integer <<FK>>
+  * **mieter_id**: integer <<FK>>
 }
 
-Patient ||.left.|| Adresse
-Patient ||..o{ Rechnung
+Patient ||.left.|| Mietvertrag
+Patient ||..o{ Mietrechnung
 
 footer (c) Juergen Zimmermann
 
 @enduml
+

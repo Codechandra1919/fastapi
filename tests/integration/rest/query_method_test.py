@@ -52,10 +52,10 @@ def test_get_by_email(email: str) -> None:
     content: Final = response_body["content"]
     assert isinstance(content, list)
     assert len(content) == 1
-    patient = content[0]
-    assert patient is not None
-    assert patient.get("email") == email
-    assert patient.get("id") is not None
+    mieter = content[0]
+    assert mieter is not None
+    assert mieter.get("email") == email
+    assert mieter.get("id") is not None
 
 
 @pytest.mark.rest
@@ -84,7 +84,7 @@ def test_get_by_email_not_found(email: str) -> None:
 
 @pytest.mark.rest
 @pytest.mark.get_request
-@pytest.mark.parametrize("teil", ["Alice", "n"])
+@pytest.mark.parametrize("teil", ["M", "n"])
 def test_get_by_nachname(teil: str) -> None:
     # arrange
     params = {"nachname": teil}

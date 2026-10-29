@@ -36,21 +36,17 @@ def test_query_id() -> None:
     query: Final = {
         "query": """
             {
-                patient(patientId: "20") {
+                mieter(mieterId: "1001") {
                     version
+                    vorname
                     nachname
                     email
-                    kategorie
-                    hasNewsletter
+                    telefonnummer
                     geburtsdatum
-                    homepage
-                    geschlecht
-                    familienstand
-                    adresse {
-                        plz
-                        ort
+                    mietvertrag {
+                        seitenAnz
+                        kaution
                     }
-                    fachaerzte
                     username
                 }
             }
@@ -72,8 +68,8 @@ def test_query_id() -> None:
     assert isinstance(response_body, dict)
     data: Final = response_body["data"]
     assert data is not None
-    patient: Final = data["patient"]
-    assert isinstance(patient, dict)
+    mieter: Final = data["mieter"]
+    assert isinstance(mieter, dict)
     assert response_body.get("errors") is None
 
 
@@ -88,7 +84,7 @@ def test_query_id_notfound() -> None:
     query: Final = {
         "query": """
             {
-                patient(patientId: "999999") {
+                mieter(mieterId: "999999") {
                     nachname
                 }
             }
@@ -108,7 +104,7 @@ def test_query_id_notfound() -> None:
     assert response.status_code == HTTPStatus.OK
     response_body: Final = response.json()
     assert isinstance(response_body, dict)
-    assert response_body["data"]["patient"] is None
+    assert response_body["data"]["mieter"] is None
     assert response_body.get("errors") is None
 
 
@@ -123,22 +119,17 @@ def test_query_email() -> None:
     query: Final = {
         "query": """
             {
-                patienten(suchparameter: {email: "admin@acme.com"}) {
-                    id
+                mieterListe(suchparameter: {email: "admin@acme.com"}) {
                     version
+                    vorname
                     nachname
                     email
-                    kategorie
-                    hasNewsletter
+                    telefonnummer
                     geburtsdatum
-                    homepage
-                    geschlecht
-                    familienstand
-                    adresse {
-                        plz
-                        ort
+                    mietvertrag {
+                        seitenAnz
+                        kaution
                     }
-                    fachaerzte
                     username
                 }
             }
@@ -158,9 +149,9 @@ def test_query_email() -> None:
     assert response.status_code == HTTPStatus.OK
     response_body: Final = response.json()
     assert isinstance(response_body, dict)
-    patienten: Final = response_body["data"]["patienten"]
-    assert isinstance(patienten, list)
-    assert len(patienten) > 0
+    mietern: Final = response_body["data"]["mieterListe"]
+    assert isinstance(mietern, list)
+    assert len(mietern) > 0
     assert response_body.get("errors") is None
 
 
@@ -175,7 +166,7 @@ def test_query_email_notfound() -> None:
     query: Final = {
         "query": """
             {
-                patienten(suchparameter: {email: "not.found@acme.com"}) {
+                mieterListe(suchparameter: {email: "not.found@acme.com"}) {
                     id
                 }
             }
@@ -195,9 +186,9 @@ def test_query_email_notfound() -> None:
     assert response.status_code == HTTPStatus.OK
     response_body: Final = response.json()
     assert isinstance(response_body, dict)
-    patienten: Final = response_body["data"]["patienten"]
-    assert isinstance(patienten, list)
-    assert len(patienten) == 0
+    mietern: Final = response_body["data"]["mieterListe"]
+    assert isinstance(mietern, list)
+    assert len(mietern) == 0
     assert response_body.get("errors") is None
 
 
@@ -212,22 +203,18 @@ def test_query_nachname() -> None:
     query: Final = {
         "query": """
             {
-                patienten(suchparameter: {nachname: "Alice"}) {
+                mieterListe(suchparameter: {nachname: "Müller"}) {
                     id
                     version
+                    vorname
                     nachname
                     email
-                    kategorie
-                    hasNewsletter
+                    telefonnummer
                     geburtsdatum
-                    homepage
-                    geschlecht
-                    familienstand
-                    adresse {
-                        plz
-                        ort
+                    mietvertrag {
+                        seitenAnz
+                        kaution
                     }
-                    fachaerzte
                     username
                 }
             }
@@ -247,9 +234,9 @@ def test_query_nachname() -> None:
     assert response.status_code == HTTPStatus.OK
     response_body: Final = response.json()
     assert isinstance(response_body, dict)
-    patienten: Final = response_body["data"]["patienten"]
-    assert isinstance(patienten, list)
-    assert len(patienten) > 0
+    mietern: Final = response_body["data"]["mieterListe"]
+    assert isinstance(mietern, list)
+    assert len(mietern) > 0
     assert response_body.get("errors") is None
 
 
@@ -264,7 +251,7 @@ def test_query_nachname_notfound() -> None:
     query: Final = {
         "query": """
             {
-                patienten(suchparameter: {nachname: "Nichtvorhanden"}) {
+                mieterListe(suchparameter: {nachname: "Nichtvorhanden"}) {
                     id
                 }
             }
@@ -284,6 +271,6 @@ def test_query_nachname_notfound() -> None:
     assert response.status_code == HTTPStatus.OK
     response_body: Final = response.json()
     assert isinstance(response_body, dict)
-    patienten: Final = response_body["data"]["patienten"]
-    assert isinstance(patienten, list)
-    assert len(patienten) == 0
+    mietern: Final = response_body["data"]["mieterListe"]
+    assert isinstance(mietern, list)
+    assert len(mietern) == 0

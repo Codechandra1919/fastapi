@@ -26,7 +26,6 @@ nav:
   - Komponentendiagramm: komponentendiagramm.md
   - Schichtenarchitektur: schichtenarchitektur.md
   - ER-Diagramm: er-diagramm.md
-  - UML-Klassendiagramm: klassendiagramm.md
   - API-Dokumentation:
       # https://chrieke.medium.com/documenting-a-python-package-with-code-reference-via-mkdocs-material-b4a45197f95b
       - __init__: modules/__init__.md

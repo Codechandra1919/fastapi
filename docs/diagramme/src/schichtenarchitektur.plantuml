@@ -17,62 +17,62 @@
 
 @startuml Schichtenarchitektur
 
-package patient #DDDDDD {
+package mieter #DDDDDD {
     package rest #FFFFFF {
-        [@router.get()\nget_by_id()\n\n@router.get()\nget()\n\n@router.get()\nget_nachnamen()] as PatientGetController
-        [@router.post()\npost()\n\n@router.put()\nput()\n\n@router.delete()\ndelete_by_id()] as PatientWriteController
+        [@router.get()\nget_by_id()\n\n@router.get()\nget()\n\n@router.get()\nget_nachnamen()] as MieterGetController
+        [@router.post()\npost()\n\n@router.put()\nput()\n\n@router.delete()\ndelete_by_id()] as MieterWriteController
         [@router.get()\nliveness()\n\n@router.get()\nreadiness()] as HealthController
 
-        [PatientGetController] -right[hidden]-> [PatientWriteController]
+        [MieterGetController] -right[hidden]-> [MieterWriteController]
     }
 
     package service #FFFFFF {
-        [find_by_id()\nfind()\nfind_nachnamen()] as PatientReadService
-        [create()\nupdate()\ndelete()] as PatientWriteService
+        [find_by_id()\nfind()\nfind_nachnamen()] as MieterReadService
+        [create()\nupdate()\ndelete()] as MieterWriteService
     }
 
-    [PatientGetController] --> [PatientReadService]
-    [PatientWriteController] --> [PatientWriteService]
+    [MieterGetController] --> [MieterReadService]
+    [MieterWriteController] --> [MieterWriteService]
 
     package repository #FFFFFF {
-        [find_by_id()\nfind()\nexists_email()\nfind_nachnamen()\ncreate()\nupdate()\ndelete_by_id()\ncheck_db_connection()] as PatientRepository
+        [find_by_id()\nfind()\nexists_email()\nfind_nachnamen()\ncreate()\nupdate()\ndelete_by_id()\ncheck_db_connection()] as MieterRepository
     }
 
-    [PatientReadService] --> [PatientRepository]
-    [PatientWriteService] --> [PatientRepository]
-    [HealthController] --> [PatientRepository]
+    [MieterReadService] --> [MieterRepository]
+    [MieterWriteService] --> [MieterRepository]
+    [HealthController] --> [MieterRepository]
 
     package entity #FFFFFF {
-        [Patient]
-        [Adresse]
-        [Rechnung]
+        [Mieter]
+        [Mietvertrag]
+        [Mietrechnung]
 
-        [Patient] -right[hidden]-> [Adresse]
-        [Adresse] -down[hidden]-> [Rechnung]
+        [Mieter] -right[hidden]-> [Mietvertrag]
+        [Mietvertrag] -down[hidden]-> [Mietrechnung]
     }
 
-    [PatientGetController] ..> [Patient]
-    [PatientWriteController] ..> [Patient]
-    [PatientReadService] .left.> [Patient]
-    [PatientWriteService] ..> [Patient]
-    [PatientRepository] ..> [Patient]
+    [MieterGetController] ..> [Mieter]
+    [MieterWriteController] ..> [Mieter]
+    [MieterReadService] .left.> [Mieter]
+    [MieterWriteService] ..> [Mieter]
+    [MieterRepository] ..> [Mieter]
 }
 
-RESTClient ~~> [PatientGetController]
-RESTClient ~~> [PatientWriteController]
+RESTClient ~~> [MieterGetController]
+RESTClient ~~> [MieterWriteController]
 RESTClient ~~> [HealthController]
 
 cloud {
     [SQLAlchemy\n(OR-Mapping)] as SQLAlchemy
 }
 
-[PatientRepository] ~down~> [SQLAlchemy]
+[MieterRepository] ~down~> [SQLAlchemy]
 entity ~~> [SQLAlchemy]
 
-database "DB patient" as db {
-    [Tabelle patient]
-    [Tabelle adresse]
-    [Tabelle rechnung]
+database "DB mieter" as db {
+    [Tabelle mieter]
+    [Tabelle mietvertrag]
+    [Tabelle mietrechnung]
 }
 
 [SQLAlchemy] ~down~> db

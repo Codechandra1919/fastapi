@@ -1,0 +1,8 @@
+id;version;vorname;nachname;email;telefonnummer;geburtsdatum;username;erzeugt;aktualisiert
+1000;0;Admin;Admin;admin@acme.com;+49 111 000000;1990-01-01;admin;2025-01-01 00:00:00;2025-01-01 00:00:00
+1001;0;Alice;Müller;alice@acme.de;+49 171 123456;1995-03-12;alice.mueller;2025-01-02 00:00:00;2025-01-02 00:00:00
+1002;0;Alice;Schmidt;alice@acme.edu;+49 172 234567;1988-07-24;alice.schmidt;2025-01-03 00:00:00;2025-01-03 00:00:00
+1003;0;Alice;Schneider;alice@acme.ch;+41 44 1234567;2000-11-05;alice.schneider;2025-01-04 00:00:00;2025-01-04 00:00:00
+1004;0;Diana;Fischer;diana@acme.uk;+44 20 79460912;1992-05-18;diana.fischer;2025-01-05 00:00:00;2025-01-05 00:00:00
+1005;0;Eve;Weber;eve@acme.jp;+81 3 1234 5678;1997-09-30;eve.weber;2025-01-06 00:00:00;2025-01-06 00:00:00
+1006;0;Frank;Meyer;frank@acme.cn;+86 10 1234 5678;1985-12-15;frank.meyer;2025-01-07 00:00:00;2025-01-07 00:00:00

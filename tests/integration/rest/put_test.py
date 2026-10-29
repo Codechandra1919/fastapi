@@ -23,22 +23,20 @@ from common_api_test import certificate_path, login, rest_url, timeout
 from requests import put
 
 EMAIL_UPDATE: Final = "alice@acme.de.put"
-HOMEPAGE_UPDATE: Final = "https://www.acme.ch.put"
 
 
 @pytest.mark.rest
 @pytest.mark.put_request
 def test_put() -> None:
     # arrange
-    patient_id: Final = 40
+    mieter_id: Final = 1003
     if_match: Final = '"0"'
-    geaenderter_patient: Final = {
-        "nachname": "Aliceput",
+    geaenderter_mieter: Final = {
+        "vorname": "Vorname",
+        "nachname": "Nachname",
         "email": EMAIL_UPDATE,
-        "kategorie": 9,
-        "has_newsletter": False,
-        "geburtsdatum": "2022-01-09",
-        "homepage": HOMEPAGE_UPDATE,
+        "telefonnummer": "+49 111 1111111",
+        "geburtsdatum": "2022-02-01",
     }
     token: Final = login()
     assert token is not None
@@ -49,8 +47,8 @@ def test_put() -> None:
 
     # act
     response: Final = put(
-        f"{rest_url}/{patient_id}",
-        json=geaenderter_patient,
+        f"{rest_url}/{mieter_id}",
+        json=geaenderter_mieter,
         headers=headers,
         timeout=timeout,
         verify=certificate_path,
@@ -65,14 +63,13 @@ def test_put() -> None:
 @pytest.mark.put_request
 def test_put_invalid() -> None:
     # arrange
-    patient_id: Final = 40
-    geaenderter_patient_invalid: Final = {
+    mieter_id: Final = 1003
+    geaenderter_mieter_invalid: Final = {
+        "vorname": "falscher_vorname_put",
         "nachname": "falscher_nachname_put",
         "email": "falsche_email_put@",
-        "kategorie": 11,
-        "has_newsletter": False,
-        "geburtsdatum": "2022-02-04",
-        "homepage": "https://?!",
+        "telefonnummer": "+49 111 1111111",
+        "geburtsdatum": "2022-02-01",
     }
     token: Final = login()
     assert token is not None
@@ -83,8 +80,8 @@ def test_put_invalid() -> None:
 
     # act
     response: Final = put(
-        f"{rest_url}/{patient_id}",
-        json=geaenderter_patient_invalid,
+        f"{rest_url}/{mieter_id}",
+        json=geaenderter_mieter_invalid,
         headers=headers,
         timeout=timeout,
         verify=certificate_path,
@@ -92,25 +89,23 @@ def test_put_invalid() -> None:
 
     # assert
     assert response.status_code == HTTPStatus.UNPROCESSABLE_ENTITY
-    assert "nachname" in response.text
-    assert "email" in response.text
-    assert "kategorie" in response.text
-    assert "homepage" in response.text
+    body = response.text
+    assert "nachname" in body
+    assert "email" in body
 
 
 @pytest.mark.rest
 @pytest.mark.put_request
 def test_put_nicht_vorhanden() -> None:
     # arrange
-    patient_id: Final = 999999
+    mieter_id: Final = 999999
     if_match: Final = '"0"'
-    geaenderter_patient: Final = {
-        "nachname": "Aliceput",
+    geaenderter_mieter: Final = {
+        "vorname": "Vorname",
+        "nachname": "Nachname",
         "email": EMAIL_UPDATE,
-        "kategorie": 9,
-        "has_newsletter": False,
-        "geburtsdatum": "2022-01-03",
-        "homepage": HOMEPAGE_UPDATE,
+        "telefonnummer": "+49 111 1111111",
+        "geburtsdatum": "2022-02-01",
     }
     token: Final = login()
     assert token is not None
@@ -121,8 +116,8 @@ def test_put_nicht_vorhanden() -> None:
 
     # act
     response: Final = put(
-        f"{rest_url}/{patient_id}",
-        json=geaenderter_patient,
+        f"{rest_url}/{mieter_id}",
+        json=geaenderter_mieter,
         headers=headers,
         timeout=timeout,
         verify=certificate_path,
@@ -136,16 +131,15 @@ def test_put_nicht_vorhanden() -> None:
 @pytest.mark.put_request
 def test_put_email_exists() -> None:
     # arrange
-    patient_id: Final = 40
+    mieter_id: Final = 1003
     if_match: Final = '"1"'
     email_exists: Final = "alice@acme.de"
-    geaenderter_patient: Final = {
-        "nachname": "Aliceput",
+    geaenderter_mieter: Final = {
+        "vorname": "Vorname",
+        "nachname": "Nachname",
         "email": email_exists,
-        "kategorie": 9,
-        "has_newsletter": False,
-        "geburtsdatum": "2022-01-09",
-        "homepage": HOMEPAGE_UPDATE,
+        "telefonnummer": "+49 111 1111111",
+        "geburtsdatum": "2022-02-01",
     }
     token: Final = login()
     assert token is not None
@@ -156,8 +150,8 @@ def test_put_email_exists() -> None:
 
     # act
     response: Final = put(
-        f"{rest_url}/{patient_id}",
-        json=geaenderter_patient,
+        f"{rest_url}/{mieter_id}",
+        json=geaenderter_mieter,
         headers=headers,
         timeout=timeout,
         verify=certificate_path,
@@ -172,14 +166,13 @@ def test_put_email_exists() -> None:
 @pytest.mark.put_request
 def test_put_ohne_versionsnr() -> None:
     # arrange
-    patient_id: Final = 40
-    geaenderter_patient: Final = {
-        "nachname": "Aliceput",
+    mieter_id: Final = 1003
+    geaenderter_mieter: Final = {
+        "vorname": "Vorname",
+        "nachname": "Nachname",
         "email": EMAIL_UPDATE,
-        "kategorie": 9,
-        "has_newsletter": False,
-        "geburtsdatum": "2022-01-03",
-        "homepage": HOMEPAGE_UPDATE,
+        "telefonnummer": "+49 111 1111111",
+        "geburtsdatum": "2022-02-01",
     }
     token: Final = login()
     assert token is not None
@@ -189,8 +182,8 @@ def test_put_ohne_versionsnr() -> None:
 
     # act
     response: Final = put(
-        f"{rest_url}/{patient_id}",
-        json=geaenderter_patient,
+        f"{rest_url}/{mieter_id}",
+        json=geaenderter_mieter,
         headers=headers,
         timeout=timeout,
         verify=certificate_path,
@@ -204,15 +197,14 @@ def test_put_ohne_versionsnr() -> None:
 @pytest.mark.put_request
 def test_put_alte_versionsnr() -> None:
     # arrange
-    patient_id: Final = 40
+    mieter_id: Final = 1003
     if_match: Final = '"-1"'
-    geaenderter_patient: Final = {
-        "nachname": "Aliceput",
+    geaenderter_mieter: Final = {
+        "vorname": "Vorname",
+        "nachname": "Nachname",
         "email": EMAIL_UPDATE,
-        "kategorie": 9,
-        "has_newsletter": False,
-        "geburtsdatum": "2022-01-03",
-        "homepage": HOMEPAGE_UPDATE,
+        "telefonnummer": "+49 111 1111111",
+        "geburtsdatum": "2022-02-01",
     }
     token: Final = login()
     assert token is not None
@@ -223,8 +215,8 @@ def test_put_alte_versionsnr() -> None:
 
     # act
     response: Final = put(
-        f"{rest_url}/{patient_id}",
-        json=geaenderter_patient,
+        f"{rest_url}/{mieter_id}",
+        json=geaenderter_mieter,
         headers=headers,
         timeout=timeout,
         verify=certificate_path,
@@ -238,15 +230,14 @@ def test_put_alte_versionsnr() -> None:
 @pytest.mark.put_request
 def test_put_ungueltige_versionsnr() -> None:
     # arrange
-    patient_id: Final = 40
+    mieter_id: Final = 1003
     if_match: Final = '"xy"'
-    geaenderter_patient: Final = {
-        "nachname": "Aliceput",
+    geaenderter_mieter: Final = {
+        "vorname": "Vorname",
+        "nachname": "Nachname",
         "email": EMAIL_UPDATE,
-        "kategorie": 9,
-        "has_newsletter": False,
-        "geburtsdatum": "2022-01-03",
-        "homepage": HOMEPAGE_UPDATE,
+        "telefonnummer": "+49 111 1111111",
+        "geburtsdatum": "2022-02-01",
     }
     token: Final = login()
     assert token is not None
@@ -257,8 +248,8 @@ def test_put_ungueltige_versionsnr() -> None:
 
     # act
     response: Final = put(
-        f"{rest_url}/{patient_id}",
-        json=geaenderter_patient,
+        f"{rest_url}/{mieter_id}",
+        json=geaenderter_mieter,
         headers=headers,
         timeout=timeout,
         verify=certificate_path,
@@ -273,15 +264,14 @@ def test_put_ungueltige_versionsnr() -> None:
 @pytest.mark.put_request
 def test_put_versionsnr_ohne_quotes() -> None:
     # arrange
-    patient_id: Final = 40
+    mieter_id: Final = 1003
     if_match: Final = "0"
-    geaenderter_patient: Final = {
-        "nachname": "Aliceput",
+    geaenderter_mieter: Final = {
+        "vorname": "Vorname",
+        "nachname": "Nachname",
         "email": EMAIL_UPDATE,
-        "kategorie": 9,
-        "has_newsletter": False,
-        "geburtsdatum": "2022-01-03",
-        "homepage": HOMEPAGE_UPDATE,
+        "telefonnummer": "+49 111 1111111",
+        "geburtsdatum": "2022-02-01",
     }
     token: Final = login()
     assert token is not None
@@ -292,8 +282,8 @@ def test_put_versionsnr_ohne_quotes() -> None:
 
     # act
     response: Final = put(
-        f"{rest_url}/{patient_id}",
-        json=geaenderter_patient,
+        f"{rest_url}/{mieter_id}",
+        json=geaenderter_mieter,
         headers=headers,
         timeout=timeout,
         verify=certificate_path,

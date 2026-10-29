@@ -31,21 +31,17 @@ def test_create() -> None:
         "query": """
             mutation {
                 create(
-                    patientInput: {
+                    mieterInput: {
+                        vorname: "Vornamegraphql"
                         nachname: "Nachnamegraphql"
                         email: "testgraphql@graphql.de"
-                        kategorie: 1
-                        hasNewsletter: true
+                        telefonnummer: "0123456789"
                         geburtsdatum: "2022-01-31"
-                        homepage: "https://graphql.de"
-                        geschlecht: WEIBLICH
-                        familienstand: LEDIG
-                        fachaerzte: [CHIRURGIE]
-                        adresse: {
-                            plz: "99999"
-                            ort: "Mutationort"
+                        mietvertrag: {
+                            seitenAnz: 9
+                            kaution: "999.99"
                         }
-                        rechnungen: [
+                        mietrechnungen: [
                             {
                                 betrag: "999.99"
                                 waehrung: "EUR"
@@ -85,23 +81,19 @@ def test_create_invalid() -> None:
         "query": """
             mutation {
                 create(
-                    patientInput: {
+                    mieterInput: {
+                        vorname: "Vornamegraphql"
                         nachname: "falscher_nachname"
                         email: "falsche_email@"
-                        kategorie: 1
-                        hasNewsletter: true
+                        telefonnummer: "0123456789"
                         geburtsdatum: "2022-01-31"
-                        homepage: "https://?!"
-                        geschlecht: WEIBLICH
-                        familienstand: LEDIG
-                        fachaerzte: [CHIRURGIE]
-                        adresse: {
-                            plz: "1234"
-                            ort: "Testort"
+                        mietvertrag: {
+                            seitenAnz: 9
+                            kaution: "999.99"
                         }
-                        rechnungen: [{
+                        mietrechnungen: [{
                             betrag: "1"
-                            waehrung: "EU"
+                            waehrung: "EUR"
                         }]
                         username: "testgraphql"
                     }

@@ -26,14 +26,14 @@ from requests import delete
 @pytest.mark.delete_request
 def test_delete() -> None:
     # arrange
-    patient_id: Final = 60
+    mieter_id: Final = 60
     token: Final = login()
     assert token is not None
     headers: Final = {"Authorization": f"Bearer {token}"}
 
     # act
     response: Final = delete(
-        f"{rest_url}/{patient_id}",
+        f"{rest_url}/{mieter_id}",
         headers=headers,
         timeout=timeout,
         verify=certificate_path,
@@ -47,14 +47,14 @@ def test_delete() -> None:
 @pytest.mark.delete_request
 def test_delete_not_found() -> None:
     # arrange
-    patient_id: Final = 999999
+    mieter_id: Final = 999999
     token: Final = login()
     assert token is not None
     headers = {"Authorization": f"Bearer {token}"}
 
     # act
     response: Final = delete(
-        f"{rest_url}/{patient_id}",
+        f"{rest_url}/{mieter_id}",
         headers=headers,
         timeout=timeout,
         verify=certificate_path,

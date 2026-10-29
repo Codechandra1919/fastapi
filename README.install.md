@@ -70,7 +70,7 @@ Mailing gestartet sein. Zur Konfiguration gibt es im jeweiligen Unterverzeichnis
 
 ## Applikationsserver
 
-Durch das Kommando `uv run patient` kann man den Server starten (siehe `project.scripts`
+Durch das Kommando `uv run mieter` kann man den Server starten (siehe `project.scripts`
 in `pyproject.toml`).
 
 ## Tests mit pytest
@@ -84,7 +84,7 @@ gestartet ist:
 
 ## Bruno
 
-Mit _Bruno_ und der Collections in `extras\bruno\patient` kann nun die REST- und
+Mit _Bruno_ und der Collections in `extras\bruno\mieter` kann nun die REST- und
 GraphQL-Schnittstelle des Applikationsservers benutzt werden.
 
 ## Docker Image
@@ -102,10 +102,10 @@ natürlich noch nicht gestartet sein dürfen, setzt man folgende Kommandos ab:
 
 ```shell
     # Windows:
-    cd extras\compose\patient
+    cd extras\compose\mieter
 
     # macOS/Linux:
-    cd extras/compose/patient
+    cd extras/compose/mieter
 
     docker compose up
 ```

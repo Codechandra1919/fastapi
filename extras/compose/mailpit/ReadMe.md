@@ -38,6 +38,7 @@ abgespeichert.
     cd extras/compose/mailpit
     docker compose up
 ```
+
 ## Netshoot als Mailclient
 
 Zunächst wird in einer 2. PowerShell oder Bash ein Docker Container mit _Netshoot_
@@ -55,7 +56,7 @@ In einer 3. PowerShell oder Bash wird mittels `telnet` eine Test-Mail abgeschick
     docker compose exec netshoot bash
 
     {
-    echo "EHLO mailpit"
+    echo "EHLO mail"
     echo "MAIL FROM: <sender@acme.com>"
     echo "RCPT TO: <recipient@acme.com>"
     echo "DATA"
@@ -66,7 +67,7 @@ In einer 3. PowerShell oder Bash wird mittels `telnet` eine Test-Mail abgeschick
     echo "My message body"
     echo "."
     echo "QUIT"
-    } | telnet mailpit 1025
+    } | telnet mail 1025
 ```
 
 ## Web-Oberfläche von Mailpit

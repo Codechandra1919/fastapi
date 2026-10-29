@@ -31,18 +31,14 @@ token: str | None
 @pytest.mark.post_request_success
 def test_post() -> None:
     # arrange
-    neuer_patient: Final = {
+    neuer_mieter: Final = {
+        "vorname": "Vorname",
         "nachname": "Nachnamerest",
         "email": "testrest@rest.de",
-        "kategorie": 1,
-        "has_newsletter": True,
+        "telefonnummer": "+49 111 1111111",
         "geburtsdatum": "2022-02-01",
-        "homepage": "https://rest.de",
-        "geschlecht": "W",
-        "familienstand": "L",
-        "adresse": {"plz": "99999", "ort": "Restort"},
-        "rechnungen": [{"betrag": "999.99", "waehrung": "EUR"}],
-        "fachaerzte": ["N"],
+        "mietvertrag": {"seiten_anz": 9, "kaution": "999.99"},
+        "mietrechnungen": [{"betrag": "999.99", "waehrung": "EUR"}],
         "username": "testrest",
     }
     headers = {"Content-Type": "application/json"}
@@ -50,7 +46,7 @@ def test_post() -> None:
     # act
     response: Final = post(
         rest_url,
-        json=neuer_patient,
+        json=neuer_mieter,
         headers=headers,
         timeout=timeout,
         verify=certificate_path,
@@ -69,18 +65,14 @@ def test_post() -> None:
 @pytest.mark.post_request
 def test_post_invalid() -> None:
     # arrange
-    neuer_patient_invalid: Final = {
+    neuer_mieter_invalid: Final = {
+        "vorname": "falscher_vorname",
         "nachname": "falscher_nachname",
         "email": "falsche_email@",
-        "kategorie": 11,
-        "has_newsletter": True,
+        "telefonnummer": "+49 111 1111111",
         "geburtsdatum": "2022-02-01",
-        "homepage": "https://?!",
-        "geschlecht": "M",
-        "familienstand": "L",
-        "adresse": {"plz": "1234", "ort": "Restort"},
-        "rechnungen": [{"betrag": "222.2", "waehrung": "EUR"}],
-        "fachaerzte": ["N"],
+        "mietvertrag": {"seiten_anz": 0, "kaution": "999.99"},
+        "mietrechnungen": [{"betrag": "222.2", "waehrung": "EURO"}],
         "username": "testrestinvalid",
     }
     headers = {"Content-Type": "application/json"}
@@ -89,7 +81,7 @@ def test_post_invalid() -> None:
     try:
         response: Final = post(
             rest_url,
-            json=neuer_patient_invalid,
+            json=neuer_mieter_invalid,
             headers=headers,
             timeout=timeout,
             verify=certificate_path,
@@ -102,9 +94,9 @@ def test_post_invalid() -> None:
     body = response.text
     assert "nachname" in body
     assert "email" in body
-    assert "kategorie" in body
-    assert "homepage" in body
-    assert "plz" in body
+    assert "mietvertrag" in body
+    assert "mietrechnungen" in body
+    assert "seiten_anz" in body
 
 
 @pytest.mark.rest
@@ -112,18 +104,14 @@ def test_post_invalid() -> None:
 def test_post_email_exists() -> None:
     # arrange
     email_exists: Final = "alice@acme.de"
-    neuer_patient: Final = {
+    neuer_mieter: Final = {
+        "vorname": "Vorname",
         "nachname": "Nachnamerest",
         "email": email_exists,
-        "kategorie": 1,
-        "has_newsletter": True,
+        "telefonnummer": "+49 111 1111111",
         "geburtsdatum": "2022-02-01",
-        "homepage": "https://rest.de",
-        "geschlecht": "W",
-        "familienstand": "L",
-        "adresse": {"plz": "99999", "ort": "Restort"},
-        "rechnungen": [{"betrag": "999.99", "waehrung": "EUR"}],
-        "fachaerzte": ["N"],
+        "mietvertrag": {"seiten_anz": 9, "kaution": "999.99"},
+        "mietrechnungen": [{"betrag": "999.99", "waehrung": "EUR"}],
         "username": "emailexists",
     }
     headers = {"Content-Type": "application/json"}
@@ -131,7 +119,7 @@ def test_post_email_exists() -> None:
     # act
     response: Final = post(
         rest_url,
-        json=neuer_patient,
+        json=neuer_mieter,
         headers=headers,
         timeout=timeout,
         verify=certificate_path,
