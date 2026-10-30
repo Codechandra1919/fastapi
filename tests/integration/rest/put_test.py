@@ -29,7 +29,7 @@ EMAIL_UPDATE: Final = "alice@acme.de.put"
 @pytest.mark.put_request
 def test_put() -> None:
     # arrange
-    mieter_id: Final = 1003
+    mieter_id: Final = 3
     if_match: Final = '"0"'
     geaenderter_mieter: Final = {
         "vorname": "Vorname",
@@ -63,7 +63,7 @@ def test_put() -> None:
 @pytest.mark.put_request
 def test_put_invalid() -> None:
     # arrange
-    mieter_id: Final = 1003
+    mieter_id: Final = 3
     geaenderter_mieter_invalid: Final = {
         "vorname": "falscher_vorname_put",
         "nachname": "falscher_nachname_put",
@@ -131,7 +131,7 @@ def test_put_nicht_vorhanden() -> None:
 @pytest.mark.put_request
 def test_put_email_exists() -> None:
     # arrange
-    mieter_id: Final = 1003
+    mieter_id: Final = 3
     if_match: Final = '"1"'
     email_exists: Final = "alice@acme.de"
     geaenderter_mieter: Final = {
@@ -166,7 +166,7 @@ def test_put_email_exists() -> None:
 @pytest.mark.put_request
 def test_put_ohne_versionsnr() -> None:
     # arrange
-    mieter_id: Final = 1003
+    mieter_id: Final = 3
     geaenderter_mieter: Final = {
         "vorname": "Vorname",
         "nachname": "Nachname",
@@ -197,7 +197,7 @@ def test_put_ohne_versionsnr() -> None:
 @pytest.mark.put_request
 def test_put_alte_versionsnr() -> None:
     # arrange
-    mieter_id: Final = 1003
+    mieter_id: Final = 3
     if_match: Final = '"-1"'
     geaenderter_mieter: Final = {
         "vorname": "Vorname",
@@ -230,7 +230,7 @@ def test_put_alte_versionsnr() -> None:
 @pytest.mark.put_request
 def test_put_ungueltige_versionsnr() -> None:
     # arrange
-    mieter_id: Final = 1003
+    mieter_id: Final = 3
     if_match: Final = '"xy"'
     geaenderter_mieter: Final = {
         "vorname": "Vorname",
@@ -264,7 +264,7 @@ def test_put_ungueltige_versionsnr() -> None:
 @pytest.mark.put_request
 def test_put_versionsnr_ohne_quotes() -> None:
     # arrange
-    mieter_id: Final = 1003
+    mieter_id: Final = 3
     if_match: Final = "0"
     geaenderter_mieter: Final = {
         "vorname": "Vorname",

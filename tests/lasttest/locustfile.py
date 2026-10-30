@@ -55,6 +55,7 @@ class GetUser(HttpUser):
         # https://docs.locust.io/en/stable/api.html#response-class
         # https://requests.readthedocs.io/en/latest/api#requests.Response
         response: Final = self.client.post(
+            method="QUERY",
             url="/auth/token",
             json={"username": "admin", "password": "p"},
         )

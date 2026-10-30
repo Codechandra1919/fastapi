@@ -26,7 +26,7 @@ from requests import get
 # in pyproject.toml bei der Table [tool.pytest.ini_options] gibt es das Array "markers"
 @pytest.mark.rest
 @pytest.mark.get_request
-@pytest.mark.parametrize("mieter_id", [1002, 1000, 1001])
+@pytest.mark.parametrize("mieter_id", [2, 0, 1])
 def test_get_by_id_admin(mieter_id: int) -> None:
     # arrange
     token: Final = login()
@@ -52,7 +52,7 @@ def test_get_by_id_admin(mieter_id: int) -> None:
 
 @pytest.mark.rest
 @pytest.mark.get_request
-@pytest.mark.parametrize("mieter_id", [0, 999999])
+@pytest.mark.parametrize("mieter_id", [-1, 999999])
 def test_get_by_id_not_found(mieter_id: int) -> None:
     # arrange
     token: Final = login()
@@ -75,7 +75,7 @@ def test_get_by_id_not_found(mieter_id: int) -> None:
 @pytest.mark.get_request
 def test_get_by_id_mieter() -> None:
     # arrange
-    mieter_id: Final = 1001
+    mieter_id: Final = 1
     token: Final = login(username="alice.mueller")
     assert token is not None
     headers = {"Authorization": f"Bearer {token}"}
@@ -99,7 +99,7 @@ def test_get_by_id_mieter() -> None:
 
 @pytest.mark.rest
 @pytest.mark.get_request
-@pytest.mark.parametrize("mieter_id", [1000, 1002])
+@pytest.mark.parametrize("mieter_id", [0, 2])
 def test_get_by_id_not_allowed(mieter_id: int) -> None:
     # arrange
     token: Final = login(username="alice.mueller")
@@ -141,7 +141,7 @@ def test_get_by_id_not_allowed_not_found(mieter_id: int) -> None:
 
 @pytest.mark.rest
 @pytest.mark.get_request
-@pytest.mark.parametrize("mieter_id", [1002, 1000, 1001])
+@pytest.mark.parametrize("mieter_id", [2, 0, 1])
 def test_get_by_id_ungueltiger_token(mieter_id: int) -> None:
     # arrange
     token: Final = login()
@@ -162,7 +162,7 @@ def test_get_by_id_ungueltiger_token(mieter_id: int) -> None:
 
 @pytest.mark.rest
 @pytest.mark.get_request
-@pytest.mark.parametrize("mieter_id", [1002, 1000, 1001])
+@pytest.mark.parametrize("mieter_id", [2, 0, 1])
 def test_get_by_id_ohne_token(mieter_id: int) -> None:
     # act
     response: Final = get(
@@ -177,7 +177,7 @@ def test_get_by_id_ohne_token(mieter_id: int) -> None:
 
 @pytest.mark.rest
 @pytest.mark.get_request
-@pytest.mark.parametrize(("mieter_id", "if_none_match"), [(1001, '"0"'), (1002, '"0"')])
+@pytest.mark.parametrize(("mieter_id", "if_none_match"), [(1, '"0"'), (2, '"0"')])
 def test_get_by_id_etag(mieter_id: int, if_none_match: str) -> None:
     # arrange
     token: Final = login()
@@ -204,7 +204,7 @@ def test_get_by_id_etag(mieter_id: int, if_none_match: str) -> None:
 @pytest.mark.get_request
 @pytest.mark.parametrize(
     ("mieter_id", "if_none_match"),
-    [(1002, 'xxx"'), (1000, "xxx"), (1001, "xxx")],
+    [(2, 'xxx"'), (0, "xxx"), (1, "xxx")],
 )
 def test_get_by_id_etag_invalid(mieter_id: int, if_none_match: str) -> None:
     # arrange

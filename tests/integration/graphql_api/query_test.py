@@ -36,7 +36,7 @@ def test_query_id() -> None:
     query: Final = {
         "query": """
             {
-                mieter(mieterId: "1001") {
+                mieter(mieterId: "1") {
                     version
                     vorname
                     nachname

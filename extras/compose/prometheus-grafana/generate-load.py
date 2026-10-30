@@ -30,13 +30,7 @@ SLEEP_IN_SECONDS = 0.05
 # Wurzelverzeichnis des Projekts
 project_root = Path(__file__).resolve().parents[3]
 cafile = (
-    project_root
-    / "src"
-    / "mieter"
-    / "config"
-    / "resources"
-    / "tls"
-    / "certificate.crt"
+    project_root / "src" / "mieter" / "config" / "resources" / "tls" / "certificate.crt"
 )
 ssl_context = create_default_context(cafile=str(cafile))
 
