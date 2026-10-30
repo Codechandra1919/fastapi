@@ -1,5 +1,5 @@
 info:
-  name: Suche nachname, email, ... vom mieteren mit ID 20
+  name: Suche nachname, email, ... vom mieteren mit ID 2
   type: graphql
   seq: 1
 
@@ -12,24 +12,18 @@ graphql:
       disabled: true
   body:
     query: |-
-      query ($mieterId: ID! = "20") {
+      query ($mieterId: ID! = "1000") {
         mieter(mieterId: $mieterId) {
           id
           version
+          vorname
           nachname
           email
-          kategorie
-          hasNewsletter
-          geburtsdatum
-          homepage
-          geschlecht
-          familienstand
-          adresse {
-            plz
-            ort
+          telefonnummer
+          mietvertrag {
+            seitenAnz
+            kaution
           }
-          fachaerzte
-          username
         }
       }
     variables: |-
@@ -86,3 +80,4 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+  forwardAuthorizationHeader: true

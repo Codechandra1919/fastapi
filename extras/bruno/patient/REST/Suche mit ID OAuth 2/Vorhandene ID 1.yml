@@ -11,7 +11,7 @@ http:
       value: application/json
   params:
     - name: id
-      value: "1000999"
+      value: "1000"
       type: path
   auth: inherit
 
