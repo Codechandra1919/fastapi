@@ -83,14 +83,14 @@ Wenn die Backend-Server eingrichtet sind, kann man sie mit _Docker Compose_ star
 
 ## Applikationsserver
 
-Durch das Kommando `uv run patient` kann man den Server starten (siehe `project.scripts`
+Durch das Kommando `uv run mieter` kann man den Server starten (siehe `project.scripts`
 in `pyproject.toml`). Dabei wird _uvicorn_ als ASGI-Server verwendet.
 
 Die von _SQLAlchemy_ generierten SQL-Anweisungen werden mit _logging_ aus der
 Python-Standardbibliothek protokolliert. Dadurch haben sie ein anderes Log-Format
 als _loguru_ und fallen auch dementsprechend auf. Wenn man das Log-Format von
 loguru auch bei SQLAlchemy haben möchte, so muss man den auskommentierten Code
-in `src\patient\repository\session.py` aktivieren.
+in `src\mieter\repository\session.py` aktivieren.
 
 ## Testen
 
@@ -264,9 +264,9 @@ groben Überblick verschaffen, wieviele Sicherheitslücken in den Bibliotheken i
 Image enthalten sind:
 
 ```shell
-    docker scout quickview juergenzimmermann/patient:2026.10.1-hardened
-    docker scout quickview juergenzimmermann/patient:2026.10.1-trixie
-    docker scout quickview juergenzimmermann/patient:2026.10.1-alpine
+    docker scout quickview juergenzimmermann/mieter:2026.10.1-hardened
+    docker scout quickview juergenzimmermann/mieter:2026.10.1-trixie
+    docker scout quickview juergenzimmermann/mieter:2026.10.1-alpine
 ```
 
 Dabei bedeutet:
@@ -282,8 +282,8 @@ Die Details zu den CVE-Records im Image kann man durch das Unterkommando `cves`
 von _Scout_ auflisten:
 
 ```shell
-    docker scout cves juergenzimmermann/patient:2026.10.1-hardened
-    docker scout cves --format only-packages juergenzimmermann/patient:2026.10.1-hardened
+    docker scout cves juergenzimmermann/mieter:2026.10.1-hardened
+    docker scout cves --format only-packages juergenzimmermann/mieter:2026.10.1-hardened
 ```
 
 Statt der Kommandozeile kann man auch den Menüpunkt "Docker Scout" im

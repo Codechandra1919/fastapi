@@ -52,8 +52,8 @@ entity "Mietrechnung" {
   * **mieter_id**: integer <<FK>>
 }
 
-Patient ||.left.|| Mietvertrag
-Patient ||..o{ Mietrechnung
+Mieter ||.left.|| Mietvertrag
+Mieter ||..o{ Mietrechnung
 
 footer (c) Juergen Zimmermann
 

@@ -30,8 +30,8 @@ host-binding = "0.0.0.0"
 
 [db]
 # dialect = "postgresql"
-# username = "patient"
-# name = "patient"
+# username = "mieter"
+# name = "mieter"
 password = "p"
 password-admin = "p"
 # host = "postgres"
@@ -55,10 +55,10 @@ enabled = true
 # port = 8443
 # realm = "python"
 # client-id = "python-client"
-client-secret = "SBaV6gifbGGpsmv58L4y1xjJbxBp7hI7iCinnp0MZfDhsFGxMbhdbOjUeRkQOmFBqGILii6Ing2VzpHgMH46j3"
+client-secret = "enFSPDvP1ehUOaLtti2Ofa8DBBG6smcXaXDBnZ4JJSW8QB1PSk2cq2p5VNQ4fJjghiw3ZRaLgZsqX3qm51IMP1"
 # admin = "admin"
 admin-password = "p"
-#csv = "/csv/patient.csv"
+#csv = "/csv/mieter.csv"
 
 [graphql]
 # Locust: auskommentieren
