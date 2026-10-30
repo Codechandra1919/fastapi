@@ -15,13 +15,13 @@ graphql:
       mutation {
         create(
           mieterInput: {
+            vorname: "Vornamegraphql"
             nachname: "falscher_nachname"
             email: "falsche_email@"
-            kategorie: 1
-            hasNewsletter: true
+            telefonnummer: "+49 111 000000"
             geburtsdatum: "2022-01-31"
             mietvertrag: {
-              seiten_anz: "5"
+              seitenAnz: 0
               kaution: "11.00"
             }
             mietrechnungen: [{
@@ -41,7 +41,7 @@ runtime:
     - type: tests
       code: |-
         test('Fehlermeldungen in "validation_errors"', () => {
-            const props = ['nachname', 'email', 'plz', 'waehrung'];
+            const props = ['nachname', 'email', 'seiten_anz', 'waehrung'];
 
             res.getBody()
                 .errors[0]

@@ -1,5 +1,5 @@
 info:
-  name: mieter 30 mit ungültigen Daten ändern
+  name: mieter 3 mit ungültigen Daten ändern
   type: http
   seq: 6
 
@@ -11,18 +11,17 @@ http:
       value: '"0"'
   params:
     - name: id
-      value: "30"
+      value: "3"
       type: path
   body:
     type: json
     data: |-
       {
-          "nachname": "falscher_nachname_put",
-          "email": "falsche_email_put@",
-          "kategorie": 11,
-          "has_newsletter": false,
-          "geburtsdatum": "2022-03-03",
-          "homepage": "https://?!"
+          "vorname": "Vornamealphaput",
+          "nachname": "Nachnamealphaput",
+          "email": "falschh@",
+          "telefonnummer": "+49 111 000000",
+          "geburtsdatum": "1990-01-01"
       }
   auth: inherit
 
@@ -62,3 +61,4 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+  forwardAuthorizationHeader: true

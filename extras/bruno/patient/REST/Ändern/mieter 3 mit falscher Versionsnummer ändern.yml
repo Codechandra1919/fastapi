@@ -1,28 +1,27 @@
 info:
-  name: mieter 30 ändern
+  name: mieter 3 mit falscher Versionsnummer ändern
   type: http
-  seq: 1
+  seq: 2
 
 http:
   method: PUT
   url: "{{restUrl}}/:id"
   headers:
     - name: If-Match
-      value: '"0"'
+      value: "0"
   params:
     - name: id
-      value: "30"
+      value: "3"
       type: path
   body:
     type: json
     data: |-
       {
-          "nachname": "Alphaput",
+          "vorname": "Vornamealphaput",
+          "nachname": "Nachnamealphaput",
           "email": "alpha@acme.de.put",
-          "kategorie": 9,
-          "has_newsletter": false,
-          "geburtsdatum": "2022-01-09",
-          "homepage": "https://www.acme.ch.put"
+          "telefonnummer": "+49 111 000000",
+          "geburtsdatum": "1990-01-01"
       }
   auth: inherit
 
@@ -30,14 +29,11 @@ runtime:
   assertions:
     - expression: res.status
       operator: eq
-      value: "204"
-    - expression: res.body
-      operator: isString
-    - expression: res.body
-      operator: isEmpty
+      value: "412"
 
 settings:
   encodeUrl: true
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+  forwardAuthorizationHeader: true

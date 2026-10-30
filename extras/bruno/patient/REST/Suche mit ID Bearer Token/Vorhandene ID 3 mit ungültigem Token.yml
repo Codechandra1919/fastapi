@@ -1,7 +1,7 @@
 info:
-  name: Vorhandene ID 30
+  name: Vorhandene ID 3 mit ungültigem Token
   type: http
-  seq: 6
+  seq: 3
 
 http:
   method: GET
@@ -11,26 +11,21 @@ http:
       value: application/json
   params:
     - name: id
-      value: "30"
+      value: "3"
       type: path
   auth:
     type: bearer
-    token: "{{TOKEN}}"
+    token: "{{TOKEN}}UNGUELTIG"
 
 runtime:
   assertions:
     - expression: res.status
       operator: eq
-      value: "200"
-    - expression: res.headers['content-type']
-      operator: eq
-      value: application/json
-    - expression: res.body.id
-      operator: eq
-      value: "30"
+      value: "401"
 
 settings:
   encodeUrl: true
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+  forwardAuthorizationHeader: true

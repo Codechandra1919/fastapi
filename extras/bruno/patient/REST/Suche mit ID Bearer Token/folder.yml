@@ -1,7 +1,7 @@
 info:
   name: Suche mit ID Bearer Token
   type: folder
-  seq: 5
+  seq: 4
 
 request:
   auth:
@@ -22,7 +22,7 @@ request:
         const password = bru.getEnvVar('password');
 
         const response = await bru.sendRequest({
-          method: 'POST',
+          method: 'QUERY',
           url: tokenUrl,
           data: { username, password },
           httpsAgent,

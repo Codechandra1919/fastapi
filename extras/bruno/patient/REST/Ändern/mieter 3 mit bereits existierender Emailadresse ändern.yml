@@ -1,5 +1,5 @@
 info:
-  name: mieter 30 mit bereits existierender Emailadresse ändern
+  name: mieter 3 mit bereits existierender Emailadresse ändern
   type: http
   seq: 7
 
@@ -11,18 +11,17 @@ http:
       value: '"1"'
   params:
     - name: id
-      value: "30"
+      value: "3"
       type: path
   body:
     type: json
     data: |-
       {
-          "nachname": "Aliceput",
+          "vorname": "Vornamealphaput",
+          "nachname": "Nachnamealphaput",
           "email": "alice@acme.de",
-          "kategorie": 9,
-          "has_newsletter": false,
-          "geburtsdatum": "2022-01-09",
-          "homepage": "https://www.acme.ch.put"
+          "telefonnummer": "+49 111 000000",
+          "geburtsdatum": "1990-01-01"
       }
   auth: inherit
 
@@ -40,3 +39,4 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+  forwardAuthorizationHeader: true

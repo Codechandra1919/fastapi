@@ -14,28 +14,22 @@ http:
     type: json
     data: |-
       {
-          "nachname": "Nachnamerest",
-          "email": "testrest@test.rest",
-          "kategorie": 1,
-          "has_newsletter": true,
-          "geburtsdatum": "2022-02-01",
-          "homepage": "https://test.rest",
-          "geschlecht": "W",
-          "familienstand": "L",
-          "adresse": {
-              "plz": "99999",
-              "ort": "Restort"
-          },
-          "rechnungen": [
+            "vorname": "Vornamerest",
+            "nachname": "Nachnamerest",
+            "email": "testrest@acme.com",
+            "telefonnummer": "+49 111 000000",
+            "geburtsdatum": "1990-01-01",
+            "mietvertrag": {
+              "seiten_anz": 12,
+              "kaution": "1500.00"
+            },
+            "mietrechnungen": [
               {
-                  "betrag": "999.99",
-                  "waehrung": "EUR"
+                "betrag": "999.99",
+                "waehrung":  "EUR"
               }
-          ],
-          "fachaerzte": [
-              "N"
-          ],
-          "username": "testrest"
+            ],
+            "username": "testrest"
       }
   auth: inherit
 
@@ -57,3 +51,4 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+  forwardAuthorizationHeader: true

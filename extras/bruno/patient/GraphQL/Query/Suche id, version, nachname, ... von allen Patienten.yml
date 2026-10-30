@@ -16,21 +16,15 @@ graphql:
         mieteren(suchparameter: null) {
           id
           version
+          vorname
           nachname
           email
-          kategorie
-          hasNewsletter
+          telefonnummer
           geburtsdatum
-          homepage
-          geschlecht
-          familienstand
-          adresse {
-            plz
-            ort
+          mietvertrag {
+            seitenAnz
+            kaution
           }
-          fachaerzte
-          username
-        }
       }
   auth: inherit
 
@@ -76,3 +70,4 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+  forwardAuthorizationHeader: true

@@ -1,7 +1,7 @@
 info:
   name: Suche mit ID OAuth 2 Authorization Code
   type: folder
-  seq: 4
+  seq: 3
 
 request:
   auth:
@@ -20,6 +20,7 @@ request:
       id: credentials
       placement:
         header: Bearer
+      source: access_token
     settings:
       autoFetchToken: true
       autoRefreshToken: false

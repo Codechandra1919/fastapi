@@ -12,19 +12,19 @@ graphql:
       disabled: true
   body:
     query: |-
-      query ($mieterId: ID! = "1000") {
+      query ($mieterId: ID! = 99999) {
         mieter(mieterId: $mieterId) {
-          id
           version
           vorname
           nachname
           email
           telefonnummer
+          geburtsdatum
           mietvertrag {
             seitenAnz
             kaution
           }
-        }
+        }  
       }
     variables: |-
       {

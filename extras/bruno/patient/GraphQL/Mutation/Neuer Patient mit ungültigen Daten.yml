@@ -15,24 +15,20 @@ graphql:
       mutation {
         create(
           mieterInput: {
-            nachname: "falscher_nachname"
-            email: "falsche_email@"
-            kategorie: 1
-            hasNewsletter: true
-            geburtsdatum: "2022-01-31"
-            homepage: "https://?!"
-            geschlecht: WEIBLICH
-            familienstand: LEDIG
-            fachaerzte: [CHIRURGIE]
-            adresse: {
-              plz: "1234"
-              ort: "Testort"
-            }
-            rechnungen: [{
-              betrag: "1"
-              waehrung: "EU"
-            }]
-            username: "testgraphql"
+            vorname: "Vornamerest"
+            nachname: "Nachnamerest"
+            email: "falschhh@"
+            telefonnummer: "+49 111 000000"
+            geburtsdatum: "1990-01-01"
+            mietvertrag: {
+              seitenAnz: 12
+              kaution: "1500.00"
+            },
+            mietrechnungen: [{
+                betrag: "999.99"
+                waehrung:  "EUR"
+              }]
+            username: "testrestttt"
           }
         ) {
           id
@@ -100,3 +96,4 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+  forwardAuthorizationHeader: true
