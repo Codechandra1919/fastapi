@@ -1,5 +1,5 @@
 info:
-  name: Suche id, version, nachname, ... von allen mieteren
+  name: Suche id, version, nachname, ... von allen Mietern
   type: graphql
   seq: 3
 
@@ -13,22 +13,18 @@ graphql:
   body:
     query: |-
       {
-        mieteren(suchparameter: null) {
+        mieterListe(suchparameter: null) {
           id
           version
+          vorname
           nachname
           email
-          kategorie
-          hasNewsletter
+          telefonnummer
           geburtsdatum
-          homepage
-          geschlecht
-          familienstand
-          adresse {
-            plz
-            ort
+          mietvertrag {
+            seitenAnz
+            kaution
           }
-          fachaerzte
           username
         }
       }
@@ -41,21 +37,17 @@ runtime:
         test('Body mit den Properties', () => {
           res.getBody()
             .data
-            .mieteren
+            .mieterListe
             .forEach(mieter => {
-              const { id, version, nachname, email, kategorie, hasNewsletter, geburtsdatum, homepage, geschlecht, familienstand, adresse, fachaerzte, username } = mieter;
+              const { id, version, vorname, nachname, email, geburtsdatum, mietvertrag, username } = mieter;
               expect(id).to.be.gte(0);
               expect(version).to.be.gte(0);
+              expect(vorname).to.be.a('string').that.is.not.empty;
               expect(nachname).to.be.a('string').that.is.not.empty;
               expect(email).to.be.a('string').that.is.not.empty;
-              expect(kategorie).to.be.gte(0);
-              expect(hasNewsletter).to.be.a('boolean');
               expect(geburtsdatum).to.be.a('string');
-              expect(homepage).to.be.a('string');
-              expect(geschlecht).to.be.a('string');
-              expect(familienstand).to.be.a('string');
-              expect(adresse).to.be.an('object').that.is.not.empty;
-              expect(fachaerzte).to.be.an('array');
+              expect(mietvertrag).to.be.an('object');
+              expect(mietvertrag.seitenAnz).to.be.gte(0);
               expect(username).to.be.a('string').that.is.not.empty;
             });
         });
@@ -66,9 +58,9 @@ runtime:
     - expression: res.headers['content-type']
       operator: eq
       value: application/json
-    - expression: res.body.data.mieteren
+    - expression: res.body.data.mieterListe
       operator: isArray
-    - expression: res.body.data.mieteren
+    - expression: res.body.data.mieterListe
       operator: isNotEmpty
 
 settings:

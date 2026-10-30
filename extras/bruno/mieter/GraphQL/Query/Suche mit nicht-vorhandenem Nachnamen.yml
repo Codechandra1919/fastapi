@@ -13,9 +13,9 @@ graphql:
   body:
     query: |-
       {
-        mieteren(suchparameter: {nachname: "Nichtvorhanden"}) {
+        mieterListe(suchparameter: {nachname: "Nichtvorhanden"}) {
           id
-        }  
+        }
       }
   auth: inherit
 
@@ -27,9 +27,9 @@ runtime:
     - expression: res.headers['content-type']
       operator: eq
       value: application/json
-    - expression: res.body.data.mieteren
+    - expression: res.body.data.mieterListe
       operator: isArray
-    - expression: res.body.data.mieteren
+    - expression: res.body.data.mieterListe
       operator: isEmpty
 
 settings:

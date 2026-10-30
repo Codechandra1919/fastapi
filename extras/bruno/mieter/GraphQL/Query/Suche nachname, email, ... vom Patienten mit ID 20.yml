@@ -1,5 +1,5 @@
 info:
-  name: Suche nachname, email, ... vom mieteren mit ID 20
+  name: Suche nachname, email, ... vom Mieter mit ID 1
   type: graphql
   seq: 1
 
@@ -12,29 +12,25 @@ graphql:
       disabled: true
   body:
     query: |-
-      query ($mieterId: ID! = "20") {
+      query ($mieterId: ID! = "1") {
         mieter(mieterId: $mieterId) {
           id
           version
+          vorname
           nachname
           email
-          kategorie
-          hasNewsletter
+          telefonnummer
           geburtsdatum
-          homepage
-          geschlecht
-          familienstand
-          adresse {
-            plz
-            ort
+          mietvertrag {
+            seitenAnz
+            kaution
           }
-          fachaerzte
           username
         }
       }
     variables: |-
       {
-        "mieterId": "30"
+        "mieterId": "1"
       }
   auth: inherit
 
@@ -59,23 +55,13 @@ runtime:
       operator: isString
     - expression: res.body.data.mieter.email
       operator: isNotEmpty
-    - expression: res.body.data.mieter.kategorie
-      operator: gt
-      value: "0"
-    - expression: res.body.data.mieter.hasNewsletter
-      operator: isBoolean
     - expression: res.body.data.mieter.geburtsdatum
       operator: isString
-    - expression: res.body.data.mieter.homepage
-      operator: isString
-    - expression: res.body.data.mieter.geschlecht
-      operator: isString
-    - expression: res.body.data.mieter.familienstand
-      operator: isString
-    - expression: res.body.data.mieter.adresse
+    - expression: res.body.data.mieter.mietvertrag
       operator: isJson
-    - expression: res.body.data.mieter.fachaerzte
-      operator: isArray
+    - expression: res.body.data.mieter.mietvertrag.seitenAnz
+      operator: gte
+      value: "0"
     - expression: res.body.data.mieter.username
       operator: isString
     - expression: res.body.data.mieter.username

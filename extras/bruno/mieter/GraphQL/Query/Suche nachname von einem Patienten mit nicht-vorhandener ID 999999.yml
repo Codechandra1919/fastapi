@@ -1,5 +1,5 @@
 info:
-  name: Suche nachname von einem mieteren mit nicht-vorhandener ID 999999
+  name: Suche nachname von einem Mieter mit nicht-vorhandener ID 999999
   type: graphql
   seq: 2
 

@@ -13,7 +13,7 @@ graphql:
   body:
     query: |-
       {
-        mieteren(suchparameter: {email: "Nicht.Vorhanden@acme.com"}) {
+        mieterListe(suchparameter: {email: "Nicht.Vorhanden@acme.com"}) {
           id
         }
       }
@@ -27,9 +27,9 @@ runtime:
     - expression: res.headers['content-type']
       operator: eq
       value: application/json
-    - expression: res.body.data.mieteren
+    - expression: res.body.data.mieterListe
       operator: isArray
-    - expression: res.body.data.mieteren
+    - expression: res.body.data.mieterListe
       operator: isEmpty
 
 settings:

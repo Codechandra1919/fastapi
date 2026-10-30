@@ -47,23 +47,18 @@ type Mutation {
 "Eigenschaften eines mieter-Datensatzes mit untergeordneten Eigenschaften"
 type mieter {
   id: ID!
-  version: Int!
+  vorname: String!
   nachname: String!
   email: String!
-  kategorie: Int!
-  hasNewsletter: Boolean!
+  telefon: String!
   geburtsdatum: Date!
-  homepage: String
-  geschlecht: Geschlecht
-  familienstand: Familienstand
-  adresse: Adresse!
-  fachaerzte: [Facharzt!]!
+  mietvertrag: Mietvertrag!
   username: String
 }
 
-type Adresse {
-  plz: String!
-  ort: String!
+type Mietvertrag {
+  seiten_anz: String!
+  kaution: String!
 }
 
 # https://spec.graphql.org/draft/#sec-Input-Objects
@@ -74,46 +69,22 @@ input Suchparameter {
 }
 
 input mieterInput {
+ id: ID!
+  vorname: String!
   nachname: String!
   email: String!
-  kategorie: Int!
-  hasNewsletter: Boolean!
+  telefon: String!
   geburtsdatum: Date!
-  familienstand: Familienstand!
-  homepage: String
-  geschlecht: Geschlecht!
-  adresse: AdresseInput!
-  rechnungen: [RechnungInput!]!
-  fachaerzte: [Facharzt!]!
-  username: String!
+  mietvertrag: Mietvertrag!
+  username: String
 }
 
-enum Geschlecht {
-  MAENNLICH
-  WEIBLICH
-  DIVERS
+input MietvertragInput {
+  seiten_anz: String!
+  kaution: String!
 }
 
-enum Familienstand {
-  LEDIG
-  VERHEIRATET
-  GESCHIEDEN
-  VERWITWET
-}
-
-enum Facharzt {
-  CHIRURGIE
-  HALS_NASEN_OHREN
-  KARDIOLOGIE
-  NEUROLOGIE
-}
-
-input AdresseInput {
-  plz: String!
-  ort: String!
-}
-
-input RechnungInput {
+input MietrechnungInput {
   betrag: Decimal!
   waehrung: String!
 }

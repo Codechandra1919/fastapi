@@ -13,22 +13,18 @@ graphql:
   body:
     query: |-
       query ($email: String = "alice@acme.com") {
-        mieteren(suchparameter: {email: $email}) {
+        mieter(suchparameter: {email: $email}) {
           id
           version
+          vorname
           nachname
-          kategorie
-          hasNewsletter
+          email
+          telefonnummer
           geburtsdatum
-          homepage
-          geschlecht
-          familienstand
-          adresse {
-            plz
-            ort
+          mietvertrag {
+            seitenAnz
+            kaution
           }
-          fachaerzte
-          username
         }
       }
     variables: |-
