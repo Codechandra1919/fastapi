@@ -13,9 +13,9 @@ graphql:
   body:
     query: |-
       {
-        mieteren(suchparameter: {nachname: "Nichtvorhanden"}) {
+        mieter(suchparameter: {nachname: "Nichtvorhanden"}) {
           id
-        }  
+        }
       }
   auth: inherit
 

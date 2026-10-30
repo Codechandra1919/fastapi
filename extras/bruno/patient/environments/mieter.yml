@@ -6,7 +6,5 @@ variables:
     value: admin
   - secret: true
     name: clientSecret
-    description: ""
   - secret: true
     name: password
-    description: ""

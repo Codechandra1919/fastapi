@@ -1,5 +1,5 @@
 info:
-  name: Suche nachname, email, ... vom Mieter mit ID 1
+  name: Suche nachname, email, ... vom Mieter mit ID 2
   type: graphql
   seq: 1
 
@@ -12,7 +12,7 @@ graphql:
       disabled: true
   body:
     query: |-
-      query ($mieterId: ID! = "1") {
+      query ($mieterId: ID! = "2") {
         mieter(mieterId: $mieterId) {
           id
           version
@@ -30,7 +30,7 @@ graphql:
       }
     variables: |-
       {
-        "mieterId": "1"
+        "mieterId": "2"
       }
   auth: inherit
 

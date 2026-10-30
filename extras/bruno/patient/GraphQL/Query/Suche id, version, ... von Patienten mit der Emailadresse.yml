@@ -13,7 +13,7 @@ graphql:
   body:
     query: |-
       query ($email: String = "alice@acme.com") {
-        mieter(suchparameter: {email: $email}) {
+        mieterListe(suchparameter: {email: $email}) {
           id
           version
           vorname
@@ -25,6 +25,7 @@ graphql:
             seitenAnz
             kaution
           }
+          username
         }
       }
     variables: |-

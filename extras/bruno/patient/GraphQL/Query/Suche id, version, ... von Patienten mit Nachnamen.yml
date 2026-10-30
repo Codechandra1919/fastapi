@@ -11,23 +11,20 @@ graphql:
       value: ""
       disabled: true
   body:
-    query: |-
-      query ($nachname: String = "Alice") {
-        mieteren(suchparameter: {nachname: $nachname}) {
+    query: |
+      query ($nachname: String = "Müller") {
+        mieterListe(suchparameter: { nachname: $nachname }) {
           id
           version
+          vorname
+          nachname
           email
-          kategorie
-          hasNewsletter
+          telefonnummer
           geburtsdatum
-          homepage
-          geschlecht
-          familienstand
-          adresse {
-            plz
-            ort
+          mietvertrag {
+            seitenAnz
+            kaution
           }
-          fachaerzte
           username
         }
       }

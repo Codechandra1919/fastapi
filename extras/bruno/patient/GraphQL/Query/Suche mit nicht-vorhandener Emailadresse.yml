@@ -13,7 +13,7 @@ graphql:
   body:
     query: |-
       {
-        mieteren(suchparameter: {email: "Nicht.Vorhanden@acme.com"}) {
+        mieter(suchparameter: {email: "Nicht.Vorhanden@acme.com"}) {
           id
         }
       }

@@ -29,7 +29,7 @@ graphql:
       }
     variables: |-
       {
-        "mieterId": "30"
+        "mieterId": "2"
       }
   auth: inherit
 
